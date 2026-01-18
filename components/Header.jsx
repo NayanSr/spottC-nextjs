@@ -1,10 +1,15 @@
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+"use client";
+
+import { UserButton, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Authenticated, Unauthenticated } from "convex/react";
+import { BarLoader } from "react-spinners";
+import { useStoreUser } from "@/hooks/use-store-user";
 
 const Header = () => {
+  const { isLoading } = useStoreUser();
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-20 border-b">
@@ -23,17 +28,25 @@ const Header = () => {
           {/* search and location - Desktop only */}
           {/* right side action */}
           <div className="flex items-center">
-            <SignedOut>
+            <Authenticated>
+              {/* create events */}
+              <UserButton />
+            </Authenticated>
+            <Unauthenticated>
               <SignInButton mode="modal">
                 <Button size="sm">Sign In</Button>
               </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            </Unauthenticated>
           </div>
         </div>
         {/* Mobile search and location - Bellow Header */}
+        {/* Loader */}
+
+        {isLoading && (
+          <div className="absolute left-0 bottom-0 w-full">
+            <BarLoader width={"100%"} color="#660000" />
+          </div>
+        )}
       </nav>
       {/* Modals */}
     </>
