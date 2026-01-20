@@ -14,7 +14,7 @@ import { Building } from "lucide-react";
 
 const Header = () => {
   const { isLoading } = useStoreUser();
-  const [showUpgradeModal, setShowUpgradeModal] = useState();
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-20 border-b">
@@ -36,7 +36,7 @@ const Header = () => {
           {/* search and location - Desktop only */}
           {/* right side action */}
           <div className="flex items-center">
-            <Button variant={"ghost"} size="sm" onClick={setShowUpgradeModal}>
+            <Button variant={"ghost"} size="sm" onClick={()=>setShowUpgradeModal(true)}>
               Pricing
             </Button>
 
