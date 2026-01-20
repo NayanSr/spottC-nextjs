@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <h2 className="">Hellow World</h2>
-      <Button>Hallo button</Button>
+      <h2>Hellow World</h2>
+      <Button className="hidden md:inline">Hallo button</Button>
     </div>
   );
 }
