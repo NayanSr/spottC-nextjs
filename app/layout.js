@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata = {
   title: "SPOTT",
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
               <footer className="border-t-4 border-gray-600 py-2 px-8 w-full max-w-7xl mx-auto">
                 Here is footer
               </footer>
+              <Toaster richColors />
             </ConvexClientProvider>
           </ClerkProvider>
         </ThemeProvider>
