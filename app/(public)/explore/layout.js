@@ -13,14 +13,14 @@ const ExploreLayout = ({children}) => {
 
 
   return (
-    <div className="pb-16">
+    <div className="pb-16 min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
         {!isMainExplore && (
           <div className="mb-6">
             <Button
               variant="ghost"
               onClick={() => router.push("/explore")}
-              className="gap-2  ml-2"
+              className="gap-2  -ml-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to explore
@@ -34,3 +34,26 @@ const ExploreLayout = ({children}) => {
 };
 
 export default ExploreLayout;
+
+
+/* 
+ <div className="pb-16 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6">
+        //? Back Button for nested routes 
+        {!isMainExplore && (
+          <div className="mb-6">
+            <Button
+              variant="ghost"
+              onClick={() => router.push("/explore")}
+              className="gap-2 -ml-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Explore
+            </Button>
+          </div>
+        )}
+
+        {children}
+      </div>
+    </div>
+*/

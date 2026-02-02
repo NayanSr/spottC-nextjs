@@ -40,21 +40,30 @@ export const store = mutation({
   },
 });
 
+
+
+// Get current authenticated user
+
+//! Copy
 export const getCurrentUser = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       return null;
     }
+
+    // 🔹 Lookup by tokenIdentifier
     const user = await ctx.db
       .query("users")
       .withIndex("by_token", (q) =>
-        q.eq("tokenIdentifire", identity.tokenIdentifier)
+        q.eq("tokenIdentifier", identity.tokenIdentifier)
       )
       .unique();
+
     if (!user) {
       throw new Error("User not found");
     }
+
     return user;
   },
 });

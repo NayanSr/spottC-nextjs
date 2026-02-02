@@ -18,15 +18,22 @@ function useCarousel() {
   return context
 }
 
+
+
 function Carousel({
   orientation = "horizontal",
   opts,
   setApi,
-  plugins,
+   plugins,
+  // plugins = [
+  //   Autoplay({
+  //     delay: 2000,
+  //   }),
+  // ],
   className,
   children,
   ...props
-}) {
+}){
   const [carouselRef, api] = useEmblaCarousel({
     ...opts,
     axis: orientation === "horizontal" ? "x" : "y",
