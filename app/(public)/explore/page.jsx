@@ -256,7 +256,12 @@ const ExplorePage = () => {
       )}
 
       {/* Empty State */}
-      {true && (
+      {!loadingFeatured &&
+        !loadingLocal &&
+        !loadingPopular &&
+        (!featuredEvents || featuredEvents.length === 0) &&
+        (!localEvents || localEvents.length === 0) &&
+        (!popularEvents || popularEvents.length === 0)  && (
         <Card className="p-12 text-center ">
           <div className="max-w-md mx-auto space-y-4">
             <div className="text-6xl mb-4">🎉</div>
@@ -273,5 +278,6 @@ const ExplorePage = () => {
     </>
   );
 };
+
 
 export default ExplorePage;
