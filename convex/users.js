@@ -19,7 +19,7 @@ export const store = mutation({
     const user = await ctx.db
       .query("users")
       .withIndex("by_token", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
+        q.eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .unique();
     if (user !== null) {
@@ -43,8 +43,6 @@ export const store = mutation({
   },
 });
 
-
-
 // Get current authenticated user
 
 //! Copy
@@ -59,7 +57,7 @@ export const getCurrentUser = query({
     const user = await ctx.db
       .query("users")
       .withIndex("by_token", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
+        q.eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .unique();
 
@@ -71,25 +69,48 @@ export const getCurrentUser = query({
   },
 });
 
-
-export const hasCompletedOnboarding= mutation({
-  args:{
+/* export const completeOnboarding = mutation({
+  args: {
     location: v.object({
       city: v.string(),
       state: v.optional(v.string()),
       country: v.string(),
     }),
-    interests:v.array(v.string()), // Min 3 categories
+    interests: v.array(v.string()), // Min 3 categories
   },
-  handler: async(ctx, args)=>{
-    const user= await ctx.runQuery(internal.user.getCurrentUser);
-
-    await tex .db.patch(user._id,{
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+    await ctx.db.patch(user._id, {
       location: args.location,
       interests: args.interests,
       hasCompletedOnboarding: true,
       updatedAt: Date.now(),
     });
+    return user._id;
+  },
+}); */
+
+
+
+export const completeOnboarding = mutation({
+  args: {
+    location: v.object({
+      city: v.string(),
+      state: v.optional(v.string()), // Added state field
+      country: v.string(),
+    }),
+    interests: v.array(v.string()), // Min 3 categories
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
+
+    await ctx.db.patch(user._id, {
+      location: args.location,
+      interests: args.interests,
+      hasCompletedOnboarding: true,
+      updatedAt: Date.now(),
+    });
+
     return user._id;
   },
 });

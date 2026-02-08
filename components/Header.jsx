@@ -11,7 +11,8 @@ import { useStoreUser } from "@/hooks/use-store-user";
 import { Plus } from "lucide-react";
 import { Ticket } from "lucide-react";
 import { Building } from "lucide-react";
-import { OnboardingModal } from "./onboarding-modal";
+// import { OnboardingModal } from "./onboarding-modal";
+import OnboardingModal from "./onboarding-modal";
 import { useOnboarding } from "@/hooks/use-onboarding";
 
 const Header = () => {
@@ -102,6 +103,8 @@ const Header = () => {
         onClose={handleOnboardingSkip}
         onComplete={handleOnboardingComplete}
       />
+
+       
     </>
   );
 };
